@@ -1,0 +1,106 @@
+<h3>
+  @if(selectedActivity() === null) {
+    {{  'add_activity' | transloco}}
+  } @else {
+    {{  'edit_activity' | transloco}}
+  }
+</h3>
+
+<form [formGroup]="form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
+  <mat-form-field >
+    <mat-label>{{  'activity_name' | transloco}}</mat-label>
+    <input matInput [placeholder]="'activity_name' | transloco" value="" formControlName="name">
+
+    @if (!form.get('name')?.hasError('requiredLength')) {
+      <mat-error>{{  'valid_activity_name' | transloco}}</mat-error>
+    }
+    @if (form.get('name')?.hasError('required')) {
+      <mat-error>{{  'activity_name_is_required' | transloco}}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>{{  'activity_description' | transloco}}</mat-label>
+    <textarea  matInput [placeholder]="'activity_description' | transloco" value="" formControlName="description">
+    </textarea>
+    @if (!form.get('description')?.hasError('requiredLength')) {
+      <mat-error>{{  'valid_description_name' | transloco}}</mat-error>
+    }
+    @if (form.get('description')?.hasError('required')) {
+      <mat-error>{{  'activity_description_is_required' | transloco}} </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Filter Combination Id</mat-label>
+    <input matInput type="number" [placeholder]="'Filter Combination Id'" value="" formControlName="filterCombinationId">
+
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>{{  'link_to_pdf' | transloco}}</mat-label>
+    <input matInput [placeholder]="'link_to_pdf' | transloco"  formControlName="pdf">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>{{  'youtube_url' | transloco}}</mat-label>
+    <input matInput [placeholder]="'youtube_url' | transloco"  formControlName="youTubeUrl">
+  </mat-form-field>
+<div class="row">
+  <mat-form-field >
+    <mat-label>{{  'select_eco_days' | transloco}}</mat-label>
+    <mat-select formControlName="ecoDays" name="ecoDays" multiple>
+      @for (ecoDay of ecoDays(); track ecoDay) {
+        <mat-option [value]="ecoDay.id">{{ecoDay.day}}.{{ecoDay.month}}: {{ecoDay.name}}</mat-option>
+      }
+    </mat-select>
+    @if (form.get('ecoDays')?.hasError('required')) {
+      <mat-error>
+        <strong>{{  'is_required' | transloco}}</strong></mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>{{  'age' | transloco}}</mat-label>
+    <mat-select formControlName="age" name="age">
+      @for (technique of pageState().ageOptions; track technique) {
+        <mat-option [value]="technique.value">{{technique.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field >
+    <mat-label>{{  'subject' | transloco}}</mat-label>
+    <mat-select formControlName="subject" name="subject">
+      @for (subject of pageState().subjectOptions; track subject) {
+        <mat-option [value]="subject.value">{{subject.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>{{  'location' | transloco}}</mat-label>
+    <mat-select formControlName="location" name="location">
+      @for (location of pageState().locationOptions; track location) {
+        <mat-option [value]="location.value">{{location.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+  <mat-form-field >
+    <mat-label>{{  'technique' | transloco}}</mat-label>
+    <mat-select formControlName="technique" name="technique">
+      @for (technique of pageState().techniques; track technique) {
+        <mat-option [value]="technique.value">{{technique.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+<div class="form-actions">
+  @if(selectedActivity() === null) {
+    <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">{{  'add_activity' | transloco}} </button>
+
+  } @else {
+    <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">{{  'edit_activity' | transloco}}</button>
+  }
+  <button type="reset" (click)="resetForm()" mat-raised-button>{{  'clear' | transloco}}</button>
+</div>
+</form>

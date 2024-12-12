@@ -1,0 +1,33 @@
+
+
+:host {
+  display: block;
+  height: 100%;
+  padding: 0 10%;
+
+  content {
+    width: 55%;
+  }
+
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 15px 0;
+  }
+
+  aside {
+    padding-left: 25px;
+    width: 45%;
+    >h3 {
+      text-align: start;
+    }
+  }
+
+}
+
+body {
+	background-color: gainsboro;
+	margin: 0;
+}

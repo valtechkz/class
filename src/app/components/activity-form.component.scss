@@ -1,0 +1,30 @@
+
+.w-full {
+  width: 100%;
+}
+
+h1 {
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  >button {
+    margin: 8px 0;
+    height: 46px;
+  }
+}
+.row {
+  display: flex;
+  gap:4px;
+  > mat-form-field  {
+    width: 100%;
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
